@@ -1,0 +1,12 @@
+install.packages("arules")
+install.packages("arulesViz")
+library(arules)
+library(arulesViz)
+market_data <- read.transactions("C:/Users/Arpitha Somayaji/Desktop/Fall 2017/DATA SCIENCE/Homework/MarketBasket/Modified_marketbasketData.csv", format="basket", sep = ",")
+itemFrequencyPlot(market_data , support = 0.06, horiz = TRUE, type="relative")
+rules <- apriori(market_data , parameter = list(supp = 0.00257, conf = 0.8));
+inspect(rules)
+sorted <- sort(rules,by="lift",decreasing = 1)
+inspect(head(sorted,5))
+plot(head(rules,method = "graph",8))
+
